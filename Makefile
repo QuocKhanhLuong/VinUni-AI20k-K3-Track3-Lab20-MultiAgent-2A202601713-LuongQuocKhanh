@@ -1,4 +1,4 @@
-.PHONY: install test lint format typecheck run-baseline run-multi benchmark clean
+.PHONY: install test lint format typecheck run-baseline run-multi benchmark offline-benchmark clean
 
 install:
 	pip install -e ".[dev,llm]"
@@ -23,6 +23,9 @@ run-multi:
 
 benchmark:
 	python -m multi_agent_research_lab.cli benchmark
+
+offline-benchmark:
+	python -m multi_agent_research_lab.cli offline-benchmark --topic AIAGENT-01
 
 clean:
 	rm -rf .pytest_cache .ruff_cache .mypy_cache dist build *.egg-info

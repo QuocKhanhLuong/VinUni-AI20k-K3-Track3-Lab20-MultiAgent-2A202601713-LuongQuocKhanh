@@ -46,9 +46,12 @@ def _citation_coverage(state: ResearchState) -> float | None:
     if not state.final_answer or not state.sources:
         return None
     body = state.final_answer.split("\n\nSources:", maxsplit=1)[0]
-    cited = {int(match) for match in re.findall(r"\[(\d+)\]", body)}
-    valid = {index for index in cited if 1 <= index <= len(state.sources)}
-    return len(valid) / len(state.sources)
+    expected = {
+        str(source.metadata.get("citation_id") or index)
+        for index, source in enumerate(state.sources, start=1)
+    }
+    cited = {match.strip() for match in re.findall(r"\[([^\[\]\n]{1,80})\]", body)}
+    return len(cited & expected) / len(expected)
 
 
 def _quality_proxy(state: ResearchState) -> float:

@@ -1,11 +1,16 @@
 """Researcher agent: search first, then compress evidence into notes."""
 
 from multi_agent_research_lab.agents.base import BaseAgent
-from multi_agent_research_lab.core.schemas import AgentName, AgentResult
+from multi_agent_research_lab.core.schemas import AgentName, AgentResult, SourceDocument
 from multi_agent_research_lab.core.state import ResearchState
 from multi_agent_research_lab.observability.tracing import trace_span
 from multi_agent_research_lab.services.llm_client import LLMClient
 from multi_agent_research_lab.services.search_client import SearchClient
+
+
+def _citation_id(source: SourceDocument, index: int) -> str:
+    value = source.metadata.get("citation_id")
+    return str(value) if value else str(index)
 
 
 class ResearcherAgent(BaseAgent):
@@ -31,14 +36,20 @@ class ResearcherAgent(BaseAgent):
             )
             state.sources = sources
             source_context = "\n\n".join(
-                f"[{index}] {source.title}\nURL: {source.url or 'N/A'}\nEvidence: {source.snippet}"
+                (
+                    f"[{_citation_id(source, index)}] {source.title}\n"
+                    f"URL: {source.url or 'N/A'}\n"
+                    f"Synthetic: {bool(source.metadata.get('is_synthetic', False))}\n"
+                    f"Evidence: {source.snippet}"
+                )
                 for index, source in enumerate(sources, start=1)
             )
             response = self.llm_client.complete(
                 system_prompt=(
                     "You are the Researcher in a multi-agent research system. Extract only claims "
-                    "supported by the supplied sources. Keep source ids like [1], [2]. Highlight "
-                    "uncertainty instead of inventing facts."
+                    "supported by the supplied sources. Preserve the exact citation ids shown in "
+                    "square brackets; do not renumber them. Explicitly label synthetic benchmark "
+                    "evidence as synthetic and highlight uncertainty instead of inventing facts."
                 ),
                 user_prompt=(
                     f"Research question: {state.request.query}\n"
