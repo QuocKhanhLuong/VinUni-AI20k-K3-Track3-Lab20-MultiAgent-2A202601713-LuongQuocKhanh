@@ -20,7 +20,7 @@ class _WorkflowState(TypedDict):
 class _SequentialGraph:
     """Offline-compatible fallback used when the optional LangGraph extra is absent."""
 
-    def __init__(self, workflow: "MultiAgentWorkflow") -> None:
+    def __init__(self, workflow: MultiAgentWorkflow) -> None:
         self.workflow = workflow
 
     def invoke(
