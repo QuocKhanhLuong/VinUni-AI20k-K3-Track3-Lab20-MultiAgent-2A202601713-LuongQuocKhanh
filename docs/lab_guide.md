@@ -22,7 +22,7 @@ File gợi ý:
 - `src/multi_agent_research_lab/cli.py`
 - `src/multi_agent_research_lab/services/llm_client.py`
 
-TODO(student): thay baseline placeholder bằng một call LLM thật.
+Baseline đã được thay bằng một search step + một LLM call duy nhất để agent tự research, phân tích và viết trong một context.
 
 ## Milestone 2: Supervisor
 
@@ -31,7 +31,7 @@ File gợi ý:
 - `src/multi_agent_research_lab/agents/supervisor.py`
 - `src/multi_agent_research_lab/graph/workflow.py`
 
-TODO(student): implement routing policy.
+Routing policy hiện dựa trên shared state: thiếu evidence → Researcher, thiếu analysis → Analyst, thiếu answer → Writer, đủ dữ liệu → `done`. `max_iterations` là guardrail bắt buộc.
 
 Gợi ý câu hỏi thiết kế:
 
@@ -49,7 +49,7 @@ File gợi ý:
 - `src/multi_agent_research_lab/agents/analyst.py`
 - `src/multi_agent_research_lab/agents/writer.py`
 
-TODO(student): implement từng worker.
+Mỗi worker chỉ chịu một responsibility và ghi output vào shared state để bước sau có thể kiểm tra/debug.
 
 ## Milestone 4: Trace và benchmark
 
@@ -69,13 +69,15 @@ Benchmark tối thiểu:
 | Citation coverage | số claims có source / tổng claims chính |
 | Failure rate | số query fail / tổng query |
 
+Chạy `make benchmark` để chạy cùng bộ query trong `configs/lab_default.yaml` qua cả hai pipeline và ghi `reports/benchmark_report.md`.
+
 ## Troubleshooting
 
 ### macOS: lỗi SSL certificate khi gọi API qua HTTPS (Tavily, OpenAI, ...)
 
 Triệu chứng: khi implement `SearchClient` (hoặc bất kỳ HTTPS call nào) trên macOS, bạn có thể gặp lỗi kiểu:
 
-```
+```text
 ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed:
 unable to get local issuer certificate
 ```
@@ -92,18 +94,9 @@ Cách khắc phục (chọn 1 trong 3):
 
    (thay `3.12` bằng version Python của bạn)
 
-2. **Dùng `certifi` trong code** — thêm `certifi` vào dependencies, rồi tạo SSL context khi gọi HTTPS:
+2. **Dùng `certifi` trong code** — thêm `certifi` vào dependencies, rồi tạo SSL context khi gọi HTTPS.
 
-   ```python
-   import certifi
-   import ssl
-   from urllib.request import urlopen
-
-   ssl_context = ssl.create_default_context(cafile=certifi.where())
-   urlopen(request, timeout=timeout, context=ssl_context)
-   ```
-
-3. **Set biến môi trường** trỏ tới CA bundle của certifi (không cần đổi code):
+3. **Set biến môi trường** trỏ tới CA bundle của certifi:
 
    ```bash
    export SSL_CERT_FILE=$(python -m certifi)
@@ -111,7 +104,10 @@ Cách khắc phục (chọn 1 trong 3):
 
 ## Exit ticket
 
-Mỗi nhóm trả lời 2 câu:
+### 1. Case nào nên dùng multi-agent? Vì sao?
 
-1. Case nào nên dùng multi-agent? Vì sao?
-2. Case nào không nên dùng multi-agent? Vì sao?
+Nên dùng multi-agent khi bài toán có nhiều bước khác bản chất và mỗi bước có thể có contract riêng, ví dụ research cần tìm nguồn → đánh giá bằng chứng → tổng hợp câu trả lời có citation. Việc tách Researcher, Analyst và Writer giúp giảm overlap trách nhiệm, làm shared state và trace rõ hơn, cho phép kiểm tra từng failure mode, thay đổi từng agent độc lập, và thêm guardrail theo từng bước. Multi-agent đáng dùng khi lợi ích về grounding, khả năng debug và chất lượng đầu ra lớn hơn overhead latency/token.
+
+### 2. Case nào không nên dùng multi-agent? Vì sao?
+
+Không nên dùng multi-agent cho task ngắn, tuyến tính, một model call đã giải quyết tốt hoặc khi latency/cost là ưu tiên chính. Thêm Supervisor và nhiều handoff trong trường hợp này chỉ làm tăng số lần gọi model, tăng token/context chuyển tiếp và tạo thêm điểm lỗi mà không mang lại specialization thực sự. Với các query đơn giản, single-agent baseline thường dễ vận hành, nhanh và rẻ hơn.

@@ -1,22 +1,50 @@
-"""Supervisor / router skeleton."""
+"""Deterministic supervisor/router for the research workflow."""
 
 from multi_agent_research_lab.agents.base import BaseAgent
-from multi_agent_research_lab.core.errors import StudentTodoError
+from multi_agent_research_lab.core.config import Settings, get_settings
 from multi_agent_research_lab.core.state import ResearchState
 
 
 class SupervisorAgent(BaseAgent):
-    """Decides which worker should run next and when to stop."""
+    """Route from shared-state completeness instead of spending another LLM call."""
 
     name = "supervisor"
 
+    def __init__(self, settings: Settings | None = None) -> None:
+        self.settings = settings or get_settings()
+
     def run(self, state: ResearchState) -> ResearchState:
-        """Update `state.route_history` with the next route.
+        """Choose researcher, analyst, writer, or done and record the decision."""
 
-        TODO(student): Implement routing policy. Suggested steps:
-        - Inspect request, current notes, and missing fields.
-        - Choose one of: researcher, analyst, writer, done.
-        - Enforce max iterations and failure fallback.
-        """
+        if state.iteration >= self.settings.max_iterations:
+            route = "done"
+            if state.final_answer is None:
+                state.errors.append(
+                    f"Guardrail stopped workflow at max_iterations={self.settings.max_iterations}."
+                )
+            state.route_history.append(route)
+            state.add_trace_event(
+                "supervisor",
+                {"route": route, "reason": "max_iterations", "iteration": state.iteration},
+            )
+            return state
 
-        raise StudentTodoError("TODO(student): implement SupervisorAgent.run")
+        if not state.sources or not state.research_notes:
+            route = "researcher"
+            reason = "research evidence missing"
+        elif not state.analysis_notes:
+            route = "analyst"
+            reason = "analysis missing"
+        elif not state.final_answer:
+            route = "writer"
+            reason = "final answer missing"
+        else:
+            route = "done"
+            reason = "all required outputs present"
+
+        state.record_route(route)
+        state.add_trace_event(
+            "supervisor",
+            {"route": route, "reason": reason, "iteration": state.iteration},
+        )
+        return state
