@@ -1,0 +1,1245 @@
+{
+  "benchmark_metadata": {
+    "benchmark_name": "AI Agent Offline Research Corpus Benchmark",
+    "benchmark_version": "2.0-rich-offline",
+    "topic_id": "AIAGENT-30",
+    "topic_number": 30,
+    "created_date": "2026-08-20",
+    "language": "en",
+    "difficulty": "advanced",
+    "intended_task": "multi-agent research report writing and evidence synthesis",
+    "data_policy": "Public references are bibliographic anchors. Synthetic benchmark sources/evidence are fictional and explicitly marked; no synthetic source should be represented as a real publication.",
+    "offline_mode": true,
+    "intended_use": "Replace internet searching with a self-contained JSON knowledge corpus for multi-agent research-report benchmarks.",
+    "source_policy": "All information needed to write the benchmark report is embedded. URLs are provenance metadata only. Synthetic evidence is explicitly labeled."
+  },
+  "topic": {
+    "name": "Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration",
+    "tags": [
+      "future",
+      "standards",
+      "interoperability",
+      "ecosystems"
+    ],
+    "research_question": "What technical and governance challenges emerge as agents from different vendors discover one another, negotiate capabilities, and collaborate across organizational boundaries?",
+    "working_thesis_for_evaluation": "Open protocols can reduce integration cost, but cross-vendor agent ecosystems need identity, trust scoring, capability discovery, versioning, authorization, provenance, dispute handling, and portable observability.",
+    "key_tensions": [
+      "open ecosystems vs trust",
+      "rapid protocol evolution vs compatibility",
+      "agent discoverability vs attack surface"
+    ],
+    "target_audience": "AI researchers, agent-system engineers, evaluation teams, and technical decision makers",
+    "expected_report_length_words": {
+      "min": 1800,
+      "target": 2800,
+      "max": 4000
+    }
+  },
+  "offline_usage_instructions": {
+    "internet_required": false,
+    "instruction": "Use only knowledge embedded in this JSON unless the benchmark runner explicitly grants external tools.",
+    "recommended_citation_format": "[source_id] for source documents and [article_id] for knowledge articles",
+    "methods_note": "How to use this offline corpus. The system should treat this JSON file as the complete information environment for the task unless the benchmark runner explicitly enables another tool. Retrieval agents may search fields inside the file, but they should not assume that an external URL has been opened. Public-reference entries are paraphrased knowledge cards with provenance metadata. Synthetic documents and tables are intentionally fictional and are labeled so that source-quality reasoning can be evaluated.\n\nRecommended research process. First create a plan that maps each subquestion to likely knowledge articles, source documents, facts, cases, and tables. Second create a claim ledger. Each claim should have a source ID or an internal knowledge article ID and a label describing whether the evidence is direct, inferential, synthetic, or contested. Third ask a critic to look for unsupported generalizations, repeated evidence masquerading as independent evidence, and recommendations that exceed the available support. Fourth write the report from the claim ledger, not from unstructured chat history. Finally run a citation audit and a consistency audit.\n\nSource hierarchy. Public primary papers, benchmark papers, standards, and protocol specifications should normally receive greater weight for claims within their scope. Engineering guidance and survey material can support design patterns and taxonomies. Synthetic controlled studies can be used as benchmark evidence but must be labeled. Synthetic field retrospectives are useful for failure-mode reasoning but are observational. Synthetic opinion surveys are weak evidence and are included as distractors.\n\nCitation behavior. A report can cite source IDs such as [react], [agentbench], or [T01-SYN-A]. The benchmark does not require the model to reproduce bibliography formatting from memory. It does require that the cited source actually supports the claim. A citation to a thematically related document is insufficient if the specific claim is not within the embedded summary or source document."
+  },
+  "knowledge_base": {
+    "knowledge_articles": [
+      {
+        "article_id": "A01",
+        "title": "Conceptual overview and research framing",
+        "content": "Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration concerns the future cross-vendor ecosystems where independent agents discover, negotiate, delegate, and transact using open standards. The topic is important because agent systems are not defined only by the quality of a base language model; they are also shaped by how work is decomposed, what state is retained, which tools are available, how intermediate results are checked, and how failures are recovered. A useful research report should therefore analyze the system as a pipeline of decisions and information transformations rather than as a collection of prompts.\n\nThe benchmark's working thesis is: Open protocols can reduce integration cost, but cross-vendor agent ecosystems need identity, trust scoring, capability discovery, versioning, authorization, provenance, dispute handling, and portable observability. This thesis should be treated as a hypothesis to evaluate, not a fact that the report must defend. The supplied evidence contains both supporting and limiting observations. A strong report states the conditions under which the thesis is plausible, the conditions under which a simpler design may be preferable, and what measurements would be needed to decide between them.\n\nThe main mechanisms in this topic are capability discovery, identity, trust signals, protocol negotiation, task contracts, provenance, billing or quotas, and dispute handling. These mechanisms interact. Improving one can worsen another: for example, a richer coordination or verification procedure may improve quality while increasing cost and latency. The benchmark therefore expects multidimensional reasoning instead of a single 'best architecture' conclusion.\n\nThree tensions should remain visible throughout the analysis: open ecosystems vs trust; rapid protocol evolution vs compatibility; and agent discoverability vs attack surface. These are not rhetorical oppositions. Each can be operationalized with measurable outcomes such as task success, evidence coverage, defect rate, latency, token use, number of handoffs, or safety incidents.\n\nPotential benefits include composable services, lower integration cost, specialized agent markets, and vendor portability. Important risks include malicious agents, capability spoofing, supply-chain compromise, protocol fragmentation, unclear liability, and trust-score gaming. The presence of both is deliberate: an agent system can be more capable on average while also being less predictable, more expensive, or harder to debug. Research quality depends on whether the design produces independent information, reliable checks, and traceable evidence rather than merely more model-generated text.",
+        "recommended_for": [
+          "planner",
+          "researcher",
+          "synthesizer"
+        ]
+      },
+      {
+        "article_id": "A02",
+        "title": "Architecture and mechanisms",
+        "content": "The architecture can be analyzed as the following interacting mechanisms:\n\n1. Capability Discovery. In a production design, capability discovery should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is composable services. The corresponding failure mode is malicious agents. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n2. Identity. In a production design, identity should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is lower integration cost. The corresponding failure mode is capability spoofing. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n3. Trust Signals. In a production design, trust signals should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is specialized agent markets. The corresponding failure mode is supply-chain compromise. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n4. Protocol Negotiation. In a production design, protocol negotiation should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is vendor portability. The corresponding failure mode is protocol fragmentation. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n5. Task Contracts. In a production design, task contracts should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is composable services. The corresponding failure mode is unclear liability. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n6. Provenance. In a production design, provenance should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is lower integration cost. The corresponding failure mode is trust-score gaming. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n7. Billing Or Quotas. In a production design, billing or quotas should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is specialized agent markets. The corresponding failure mode is malicious agents. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\n8. Dispute Handling. In a production design, dispute handling should be represented by an explicit interface, state transition, or policy rather than being left implicit in conversational text. Its intended contribution is vendor portability. The corresponding failure mode is capability spoofing. A benchmarked implementation should record when this mechanism is invoked, what information it consumes, what artifact it produces, and how that artifact is validated before another agent relies on it.\n\nA key systems principle is to separate evidence, hypotheses, decisions, and actions. Evidence should remain traceable to a source or executable observation. Hypotheses may be revised. Decisions should record the criterion used. Actions should be permissioned and observable. When these categories collapse into a single natural-language transcript, it becomes difficult to determine whether later agents are using verified information or merely repeating an earlier guess.",
+        "recommended_for": [
+          "architect",
+          "researcher",
+          "critic"
+        ]
+      },
+      {
+        "article_id": "A03",
+        "title": "Implementation patterns and anti-patterns",
+        "content": "Implementation patterns\n\nPattern 1: signed agent cards. This pattern is useful when the task conditions match its information flow. A robust implementation specifies entry conditions, expected artifact, success criterion, and fallback. It should also identify which agent owns the authoritative version of each artifact and whether later agents may modify it or only append annotations.\n\nPattern 2: policy gateway. This pattern is useful when the task conditions match its information flow. A robust implementation specifies entry conditions, expected artifact, success criterion, and fallback. It should also identify which agent owns the authoritative version of each artifact and whether later agents may modify it or only append annotations.\n\nPattern 3: reputation plus verification. This pattern is useful when the task conditions match its information flow. A robust implementation specifies entry conditions, expected artifact, success criterion, and fallback. It should also identify which agent owns the authoritative version of each artifact and whether later agents may modify it or only append annotations.\n\nPattern 4: portable audit trail. This pattern is useful when the task conditions match its information flow. A robust implementation specifies entry conditions, expected artifact, success criterion, and fallback. It should also identify which agent owns the authoritative version of each artifact and whether later agents may modify it or only append annotations.\n\nPattern 5: version negotiation. This pattern is useful when the task conditions match its information flow. A robust implementation specifies entry conditions, expected artifact, success criterion, and fallback. It should also identify which agent owns the authoritative version of each artifact and whether later agents may modify it or only append annotations.\n\nAnti-patterns\n- Avoid equating open discovery with authorization.\n- Avoid trusting self-asserted capabilities.\n- Avoid omitting provenance across organizational boundaries.\n\nA practical design should begin with the simplest pattern that can satisfy the task. Additional agents, memory tiers, or debate rounds should be justified by an explicit failure mode or measurable quality target. Complexity that has no associated hypothesis or metric is difficult to evaluate and often becomes permanent orchestration overhead.",
+        "recommended_for": [
+          "architect",
+          "engineer",
+          "critic"
+        ]
+      },
+      {
+        "article_id": "A04",
+        "title": "Evaluation methodology and metrics",
+        "content": "Evaluation should compare outcome quality and process quality. Outcome metrics answer whether the final task was completed correctly. Process metrics explain how the result was produced and whether the same performance is likely to survive changes in prompts, tools, or task length.\n\n- cross-vendor success rate: define a numerator, denominator or unit, a collection point in the trace, and an acceptance threshold before the evaluation run.\n- discovery precision: define a numerator, denominator or unit, a collection point in the trace, and an acceptance threshold before the evaluation run.\n- protocol compatibility: define a numerator, denominator or unit, a collection point in the trace, and an acceptance threshold before the evaluation run.\n- fraud/abuse rate: define a numerator, denominator or unit, a collection point in the trace, and an acceptance threshold before the evaluation run.\n- task dispute rate: define a numerator, denominator or unit, a collection point in the trace, and an acceptance threshold before the evaluation run.\n- switching cost: define a numerator, denominator or unit, a collection point in the trace, and an acceptance threshold before the evaluation run.\n\nRecommended experiment design: run a strong single-agent baseline, the proposed multi-agent or agentic design, and at least one ablation that removes the mechanism believed to create the gain. Match base model, tool access, retrieval corpus, and task set where possible. Execute multiple runs because stochastic systems can have wide variance. Report median and dispersion, not only the best run.\n\nFor research-report tasks, score claim correctness, claim coverage, source quality, citation entailment, contradiction handling, uncertainty calibration, and whether recommendations follow from the evidence. Track total input/output tokens, external tool calls, wall-clock time, number of agent turns, retries, and failed actions. A system that gains two quality points at ten times the cost may be appropriate for a high-value report and inappropriate for routine summarization; the benchmark should preserve that trade-off rather than hide it inside one aggregate score.",
+        "recommended_for": [
+          "evaluator",
+          "critic",
+          "synthesizer"
+        ]
+      },
+      {
+        "article_id": "A05",
+        "title": "Security, privacy, and governance",
+        "content": "Security and governance for Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration should be based on trust boundaries rather than on whether an agent is described as helpful or specialized. Every external document, remote agent, tool result, user-provided artifact, and persistent memory entry can carry untrusted content. Model output is also untrusted until validated for the action it is about to trigger.\n\nLeast privilege means that an agent receives only the capabilities needed for its current role and task. Read operations should be separated from writes where practical. High-impact actions should pass through a policy or approval boundary that does not depend solely on the model's own confidence. Credentials should be scoped and preferably short-lived. Sensitive context should be distributed on a need-to-know basis instead of copied into a shared transcript.\n\nPrompt injection deserves special treatment because an agent that browses or retrieves content may encounter text designed to masquerade as instructions. A robust system preserves an instruction hierarchy outside untrusted content, labels provenance, prevents retrieved text from directly expanding permissions, validates tool arguments, and requires stronger confirmation for irreversible actions. Multi-agent systems add another propagation path: one compromised researcher can write a malicious or false instruction into shared state, so downstream agents must treat peer messages as data with provenance, not as automatically trusted policy.\n\nGovernance should assign a named system owner, define acceptable autonomy levels, maintain an inventory of connected tools and data classes, log policy-relevant events, and include incident procedures for revoking credentials, quarantining memory, and replaying affected traces. Evaluation should include adversarial tasks in addition to ordinary success cases.",
+        "recommended_for": [
+          "security_reviewer",
+          "governance_reviewer",
+          "synthesizer"
+        ]
+      },
+      {
+        "article_id": "A06",
+        "title": "Comparative analysis and boundary conditions",
+        "content": "A useful comparison matrix should not ask only whether an agentic design is 'better.' It should identify task conditions. Simple or single-agent approaches are often preferable when the task is short, the evidence is already available, the output can be verified cheaply, and there is little benefit from independent parallel work. More structured agent systems become more attractive as tasks require heterogeneous tools, independent evidence routes, long-running state, specialized checks, or controlled handoffs.\n\nFor this topic, candidate patterns are signed agent cards, policy gateway, reputation plus verification, portable audit trail, and version negotiation. Compare them across at least these dimensions: correctness, coverage, robustness to misleading inputs, ease of debugging, cost, latency, permission surface, and recovery after partial failure. The comparison should preserve task assumptions: changing both the model and the architecture at the same time prevents a clean attribution of gains.\n\nThe strongest conclusion is usually conditional. For example, a design may dominate at high task complexity but lose on routine work; it may improve average factuality yet produce a heavier tail of operational failures; or it may be cheaper in wall-clock time because of parallelism while more expensive in total inference. A benchmark report should make these conditional regions explicit.",
+        "recommended_for": [
+          "critic",
+          "synthesizer"
+        ]
+      },
+      {
+        "article_id": "A07",
+        "title": "Engineering recommendations",
+        "content": "Recommended engineering approach:\n\n1. Define the task contract before designing agents: inputs, allowed sources and tools, required outputs, acceptance tests, budget, and risk level.\n2. Establish a strong baseline using the least complex viable workflow. Measure it on the same corpus and task set.\n3. Introduce mechanisms selectively: capability discovery, identity, trust signals, protocol negotiation, task contracts, provenance, billing or quotas, and dispute handling. For each mechanism, write down the failure it is intended to reduce and the metric expected to move.\n4. Use structured artifacts for plans, claims, evidence, and decisions. Keep source provenance immutable and make revisions append-only where practical.\n5. Separate generation from acceptance. A later verifier should use independent evidence, executable checks, or explicit criteria rather than simply echoing the original agent.\n6. Set budgets for turns, tokens, retries, and parallel workers. Add early stopping when evidence saturates or when additional agents are repeating existing conclusions.\n7. Apply least privilege and trust-boundary controls to tools, remote agents, retrieved content, and persistent memory.\n8. Evaluate on normal, ambiguous, adversarial, and failure-recovery cases. Record versions and traces so regressions can be reproduced.\n\nThe decision to ship should be based on a scorecard, not a demonstration. A production candidate should show consistent gains on the target task, acceptable cost and latency, stable behavior across repeated runs, low unsupported-claim and unsafe-action rates, and a recovery path for known failures.",
+        "recommended_for": [
+          "synthesizer",
+          "decision_maker"
+        ]
+      }
+    ],
+    "source_documents": [
+      {
+        "document_id": "a2a_1",
+        "title": "Agent2Agent (A2A) Protocol Specification 1.0 / 1.0.x",
+        "document_class": "public_reference_summary",
+        "is_synthetic": false,
+        "citation_label": "a2a_1",
+        "provenance_url": "https://a2a-protocol.org/",
+        "authors_or_org": "A2A Protocol project / Linux Foundation",
+        "year": 2026,
+        "full_text": "Source orientation. A2A 1.0, released in 2026 with subsequent 1.0.x fixes, standardizes communication between independent agent systems. The protocol focuses on discovery, messages and artifacts, task lifecycle, streaming, transport bindings, and cross-system interoperability without requiring one agent to expose its private internal memory or implementation.\n\nRelevance to this topic. For Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, this reference is included because it provides a conceptual, architectural, benchmarking, or governance anchor that the research system can use without opening the external URL. The benchmark expects the agent to connect the source to a specific claim rather than cite it decoratively. A source about an architecture should support statements about that architecture; a benchmark should support statements about observed evaluation behavior; a security or governance document should support risk-management recommendations.\n\nEvidence-use guidance. Distinguish what the source directly establishes from what is a design inference. Framework and system papers often demonstrate feasibility and report results in selected environments, but they do not prove that the pattern generalizes to all tasks. Benchmark papers reveal failure modes and comparative performance under a test setup, but results can change with model generations and tools. Guidance documents describe risk-management practices rather than experimental effect sizes.\n\nLimitations for synthesis. A2A enables communication but does not make remote agents trustworthy. Production use requires identity, authorization, version negotiation, resource scoping, provenance, and application-specific acceptance rules. The report should preserve these limits. Where the source is used to motivate a recommendation, label the recommendation as an engineering inference unless the exact control or result is directly in scope.",
+        "key_takeaways": [
+          "A2A 1.0, released in 2026 with subsequent 1.0.x fixes, standardizes communication between independent agent systems. The protocol focuses on discovery, messages and artifacts, task lifecycle, streaming, transport bindings, and cross-system interoperability without requiring one agent to expose its private internal memory or implementation.",
+          "A2A enables communication but does not make remote agents trustworthy. Production use requires identity, authorization, version negotiation, resource scoping, provenance, and application-specific acceptance rules."
+        ],
+        "recommended_weight": "high for claims that match the source scope; lower for cross-domain generalization"
+      },
+      {
+        "document_id": "mcp_2026",
+        "title": "The 2026-07-28 Model Context Protocol Specification",
+        "document_class": "public_reference_summary",
+        "is_synthetic": false,
+        "citation_label": "mcp_2026",
+        "provenance_url": "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+        "authors_or_org": "Model Context Protocol project",
+        "year": 2026,
+        "full_text": "Source orientation. The July 28, 2026 Model Context Protocol release moved to a stateless core and added features such as multi-round-trip requests, header-based routing, cacheable list results, authorization hardening, formal extensions, and updated SDK support. MCP is best understood as an interoperability layer for exposing tools, resources, prompts, and contextual capabilities to model-driven clients.\n\nRelevance to this topic. For Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, this reference is included because it provides a conceptual, architectural, benchmarking, or governance anchor that the research system can use without opening the external URL. The benchmark expects the agent to connect the source to a specific claim rather than cite it decoratively. A source about an architecture should support statements about that architecture; a benchmark should support statements about observed evaluation behavior; a security or governance document should support risk-management recommendations.\n\nEvidence-use guidance. Distinguish what the source directly establishes from what is a design inference. Framework and system papers often demonstrate feasibility and report results in selected environments, but they do not prove that the pattern generalizes to all tasks. Benchmark papers reveal failure modes and comparative performance under a test setup, but results can change with model generations and tools. Guidance documents describe risk-management practices rather than experimental effect sizes.\n\nLimitations for synthesis. Protocol interoperability does not imply that a server or its content is trusted. Clients still need authorization policy, capability allowlists, output validation, and protection against malicious or misleading tool/resource content. The report should preserve these limits. Where the source is used to motivate a recommendation, label the recommendation as an engineering inference unless the exact control or result is directly in scope.",
+        "key_takeaways": [
+          "The July 28, 2026 Model Context Protocol release moved to a stateless core and added features such as multi-round-trip requests, header-based routing, cacheable list results, authorization hardening, formal extensions, and updated SDK support. MCP is best understood as an interoperability layer for exposing tools, resources, prompts, and contextual capabilities to model-driven clients.",
+          "Protocol interoperability does not imply that a server or its content is trusted. Clients still need authorization policy, capability allowlists, output validation, and protection against malicious or misleading tool/resource content."
+        ],
+        "recommended_weight": "high for claims that match the source scope; lower for cross-domain generalization"
+      },
+      {
+        "document_id": "nist_rmf",
+        "title": "Artificial Intelligence Risk Management Framework (AI RMF 1.0)",
+        "document_class": "public_reference_summary",
+        "is_synthetic": false,
+        "citation_label": "nist_rmf",
+        "provenance_url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10",
+        "authors_or_org": "National Institute of Standards and Technology",
+        "year": 2023,
+        "full_text": "Source orientation. NIST AI RMF 1.0 presents voluntary risk-management functions commonly summarized as GOVERN, MAP, MEASURE, and MANAGE. For agent systems, the important application is to treat the full sociotechnical system—not only the base model—as the risk object, with named responsibilities, measurement, monitoring, and response processes.\n\nRelevance to this topic. For Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, this reference is included because it provides a conceptual, architectural, benchmarking, or governance anchor that the research system can use without opening the external URL. The benchmark expects the agent to connect the source to a specific claim rather than cite it decoratively. A source about an architecture should support statements about that architecture; a benchmark should support statements about observed evaluation behavior; a security or governance document should support risk-management recommendations.\n\nEvidence-use guidance. Distinguish what the source directly establishes from what is a design inference. Framework and system papers often demonstrate feasibility and report results in selected environments, but they do not prove that the pattern generalizes to all tasks. Benchmark papers reveal failure modes and comparative performance under a test setup, but results can change with model generations and tools. Guidance documents describe risk-management practices rather than experimental effect sizes.\n\nLimitations for synthesis. The framework is intentionally general and risk-based. It does not prescribe one agent architecture or provide implementation-specific controls for every tool protocol. The report should preserve these limits. Where the source is used to motivate a recommendation, label the recommendation as an engineering inference unless the exact control or result is directly in scope.",
+        "key_takeaways": [
+          "NIST AI RMF 1.0 presents voluntary risk-management functions commonly summarized as GOVERN, MAP, MEASURE, and MANAGE. For agent systems, the important application is to treat the full sociotechnical system—not only the base model—as the risk object, with named responsibilities, measurement, monitoring, and response processes.",
+          "The framework is intentionally general and risk-based. It does not prescribe one agent architecture or provide implementation-specific controls for every tool protocol."
+        ],
+        "recommended_weight": "high for claims that match the source scope; lower for cross-domain generalization"
+      },
+      {
+        "document_id": "owasp_llm",
+        "title": "OWASP Top 10 for LLMs and Gen AI Apps (2025)",
+        "document_class": "public_reference_summary",
+        "is_synthetic": false,
+        "citation_label": "owasp_llm",
+        "provenance_url": "https://genai.owasp.org/llm-top-10/",
+        "authors_or_org": "OWASP GenAI Security Project",
+        "year": 2025,
+        "full_text": "Source orientation. OWASP’s 2025 Top 10 for LLM and generative-AI applications includes risks such as prompt injection, sensitive-information disclosure, supply-chain weaknesses, data/model poisoning, improper output handling, excessive agency, system prompt leakage, vector/embedding weaknesses, misinformation, and unbounded consumption. Agent systems often intensify these risks because model outputs can cross trust boundaries and cause actions.\n\nRelevance to this topic. For Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, this reference is included because it provides a conceptual, architectural, benchmarking, or governance anchor that the research system can use without opening the external URL. The benchmark expects the agent to connect the source to a specific claim rather than cite it decoratively. A source about an architecture should support statements about that architecture; a benchmark should support statements about observed evaluation behavior; a security or governance document should support risk-management recommendations.\n\nEvidence-use guidance. Distinguish what the source directly establishes from what is a design inference. Framework and system papers often demonstrate feasibility and report results in selected environments, but they do not prove that the pattern generalizes to all tasks. Benchmark papers reveal failure modes and comparative performance under a test setup, but results can change with model generations and tools. Guidance documents describe risk-management practices rather than experimental effect sizes.\n\nLimitations for synthesis. A top-ten list is a prioritization aid rather than a complete threat model. Concrete controls depend on the application, privileges, data, tools, and deployment architecture. The report should preserve these limits. Where the source is used to motivate a recommendation, label the recommendation as an engineering inference unless the exact control or result is directly in scope.",
+        "key_takeaways": [
+          "OWASP’s 2025 Top 10 for LLM and generative-AI applications includes risks such as prompt injection, sensitive-information disclosure, supply-chain weaknesses, data/model poisoning, improper output handling, excessive agency, system prompt leakage, vector/embedding weaknesses, misinformation, and unbounded consumption. Agent systems often intensify these risks because model outputs can cross trust boundaries and cause actions.",
+          "A top-ten list is a prioritization aid rather than a complete threat model. Concrete controls depend on the application, privileges, data, tools, and deployment architecture."
+        ],
+        "recommended_weight": "high for claims that match the source scope; lower for cross-domain generalization"
+      },
+      {
+        "document_id": "autogen",
+        "title": "AutoGen: Enabling Next-Gen LLM Applications via Multi-Agent Conversation",
+        "document_class": "public_reference_summary",
+        "is_synthetic": false,
+        "citation_label": "autogen",
+        "provenance_url": "https://arxiv.org/abs/2308.08155",
+        "authors_or_org": "Qingyun Wu et al.",
+        "year": 2023,
+        "full_text": "Source orientation. AutoGen described a framework for constructing LLM applications as conversations among customizable agents. Agents can combine language models, human input, tools, and code, and developers can define different interaction patterns. Its main relevance to multi-agent research is architectural: collaboration can be programmed as roles and message exchanges rather than as one monolithic prompt.\n\nRelevance to this topic. For Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, this reference is included because it provides a conceptual, architectural, benchmarking, or governance anchor that the research system can use without opening the external URL. The benchmark expects the agent to connect the source to a specific claim rather than cite it decoratively. A source about an architecture should support statements about that architecture; a benchmark should support statements about observed evaluation behavior; a security or governance document should support risk-management recommendations.\n\nEvidence-use guidance. Distinguish what the source directly establishes from what is a design inference. Framework and system papers often demonstrate feasibility and report results in selected environments, but they do not prove that the pattern generalizes to all tasks. Benchmark papers reveal failure modes and comparative performance under a test setup, but results can change with model generations and tools. Guidance documents describe risk-management practices rather than experimental effect sizes.\n\nLimitations for synthesis. A framework demonstration is not proof that multiple agents always outperform one agent. Performance depends on model quality, task structure, interaction policy, and how redundant conversation is controlled. The report should preserve these limits. Where the source is used to motivate a recommendation, label the recommendation as an engineering inference unless the exact control or result is directly in scope.",
+        "key_takeaways": [
+          "AutoGen described a framework for constructing LLM applications as conversations among customizable agents. Agents can combine language models, human input, tools, and code, and developers can define different interaction patterns. Its main relevance to multi-agent research is architectural: collaboration can be programmed as roles and message exchanges rather than as one monolithic prompt.",
+          "A framework demonstration is not proof that multiple agents always outperform one agent. Performance depends on model quality, task structure, interaction policy, and how redundant conversation is controlled."
+        ],
+        "recommended_weight": "high for claims that match the source scope; lower for cross-domain generalization"
+      },
+      {
+        "document_id": "anthropic_agents",
+        "title": "Building Effective Agents",
+        "document_class": "public_reference_summary",
+        "is_synthetic": false,
+        "citation_label": "anthropic_agents",
+        "provenance_url": "https://www.anthropic.com/engineering/building-effective-agents",
+        "authors_or_org": "Anthropic",
+        "year": 2024,
+        "full_text": "Source orientation. Engineering guidance on effective agents distinguishes more deterministic workflows from more autonomous agents and argues for starting with simple, composable patterns before adding complexity. Common patterns include prompt chaining, routing, parallelization, orchestrator-workers, and evaluator-optimizer loops. The practical lesson is to choose the least complex architecture that meets the task.\n\nRelevance to this topic. For Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, this reference is included because it provides a conceptual, architectural, benchmarking, or governance anchor that the research system can use without opening the external URL. The benchmark expects the agent to connect the source to a specific claim rather than cite it decoratively. A source about an architecture should support statements about that architecture; a benchmark should support statements about observed evaluation behavior; a security or governance document should support risk-management recommendations.\n\nEvidence-use guidance. Distinguish what the source directly establishes from what is a design inference. Framework and system papers often demonstrate feasibility and report results in selected environments, but they do not prove that the pattern generalizes to all tasks. Benchmark papers reveal failure modes and comparative performance under a test setup, but results can change with model generations and tools. Guidance documents describe risk-management practices rather than experimental effect sizes.\n\nLimitations for synthesis. Engineering guidance is not a universal benchmark and should be combined with domain-specific evaluation. Simpler patterns can still fail if tools, evidence, or acceptance checks are weak. The report should preserve these limits. Where the source is used to motivate a recommendation, label the recommendation as an engineering inference unless the exact control or result is directly in scope.",
+        "key_takeaways": [
+          "Engineering guidance on effective agents distinguishes more deterministic workflows from more autonomous agents and argues for starting with simple, composable patterns before adding complexity. Common patterns include prompt chaining, routing, parallelization, orchestrator-workers, and evaluator-optimizer loops. The practical lesson is to choose the least complex architecture that meets the task.",
+          "Engineering guidance is not a universal benchmark and should be combined with domain-specific evaluation. Simpler patterns can still fail if tools, evidence, or acceptance checks are weak."
+        ],
+        "recommended_weight": "high for claims that match the source scope; lower for cross-domain generalization"
+      },
+      {
+        "document_id": "T30-SYN-A",
+        "title": "Controlled Lab Study on Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration",
+        "document_class": "synthetic_experiment",
+        "is_synthetic": true,
+        "citation_label": "T30-SYN-A",
+        "full_text": "Purpose and context. This is a synthetic benchmark document created for Topic 30: Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration. It is not a real publication and should never be cited as one. Its purpose is to give the research system a self-contained piece of evidence with enough methodological detail to evaluate rather than merely repeat.\n\nStudy design. 120 benchmark tasks, three random seeds, matched model family and tool access. The synthetic study defines success at the task level and also records process indicators such as evidence coverage, unsupported claims, tool calls, token consumption, elapsed time, retries, and handoff defects. Runs are grouped by task complexity so that gains on difficult cases are not averaged together with routine cases.\n\nMain finding. Reports using a structured implementation of the topic's recommended pattern improved evidence coverage by 11–18%, but median token cost increased by 22–41%. The effect is intentionally presented as conditional. The data suggest that structured agentic mechanisms can help when they produce additional independent evidence or catch defects, but the same mechanisms can add substantial coordination and inference overhead. The study therefore does not support a blanket claim that more agents or more autonomy is better.\n\nSecondary observations. Benefits were concentrated in tasks with multiple evidence types, ambiguous subquestions, or explicit verification steps. On short tasks with one clear information path, the simpler baseline often completed faster and with similar factual quality. Coordination failures included duplicated retrieval, inconsistent terminology, stale summaries, and verifier agents that accepted upstream claims without inspecting the original evidence.\n\nInterpretation guidance. Use this source as benchmark evidence, not external ground truth. It can support statements about the synthetic experiment's observations and can motivate hypotheses for real systems. It should not be generalized to all models, organizations, or environments. The most defensible synthesis compares its findings with the public-reference summaries and explains which mechanisms could plausibly produce the observed differences.\n\nLimitations. Synthetic tasks; may not transfer to live web environments or organization-specific workflows. Additional limitations include synthetic task construction, possible prompt-specific effects, and the absence of a guarantee that simulated operational failures match live deployments.",
+        "methodology": "120 benchmark tasks, three random seeds, matched model family and tool access.",
+        "supported_claims": [
+          "Reports using a structured implementation of the topic's recommended pattern improved evidence coverage by 11–18%, but median token cost increased by 22–41%.",
+          "The evidence is conditional and should be compared against a simpler baseline.",
+          "Coordination quality is a measurable part of system quality."
+        ],
+        "limitations": [
+          "Synthetic tasks; may not transfer to live web environments or organization-specific workflows.",
+          "Synthetic benchmark evidence; not a real-world publication.",
+          "Do not infer universal causal effects."
+        ],
+        "recommended_weight": "medium for benchmark synthesis; never present as external publication"
+      },
+      {
+        "document_id": "T30-SYN-B",
+        "title": "Field Deployment Retrospective: Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration",
+        "document_class": "synthetic_case_study",
+        "is_synthetic": true,
+        "citation_label": "T30-SYN-B",
+        "full_text": "Purpose and context. This is a synthetic benchmark document created for Topic 30: Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration. It is not a real publication and should never be cited as one. Its purpose is to give the research system a self-contained piece of evidence with enough methodological detail to evaluate rather than merely repeat.\n\nStudy design. Retrospective over 8 weeks and 2,400 agent runs; no randomized control. The synthetic study defines success at the task level and also records process indicators such as evidence coverage, unsupported claims, tool calls, token consumption, elapsed time, retries, and handoff defects. Runs are grouped by task complexity so that gains on difficult cases are not averaged together with routine cases.\n\nMain finding. Operational failures were concentrated at handoffs and state transitions rather than in initial task understanding; explicit checks reduced repeat incidents. The effect is intentionally presented as conditional. The data suggest that structured agentic mechanisms can help when they produce additional independent evidence or catch defects, but the same mechanisms can add substantial coordination and inference overhead. The study therefore does not support a blanket claim that more agents or more autonomy is better.\n\nSecondary observations. Benefits were concentrated in tasks with multiple evidence types, ambiguous subquestions, or explicit verification steps. On short tasks with one clear information path, the simpler baseline often completed faster and with similar factual quality. Coordination failures included duplicated retrieval, inconsistent terminology, stale summaries, and verifier agents that accepted upstream claims without inspecting the original evidence.\n\nInterpretation guidance. Use this source as benchmark evidence, not external ground truth. It can support statements about the synthetic experiment's observations and can motivate hypotheses for real systems. It should not be generalized to all models, organizations, or environments. The most defensible synthesis compares its findings with the public-reference summaries and explains which mechanisms could plausibly produce the observed differences.\n\nLimitations. Observational and organization-specific; system changed during the measurement period. Additional limitations include synthetic task construction, possible prompt-specific effects, and the absence of a guarantee that simulated operational failures match live deployments.",
+        "methodology": "Retrospective over 8 weeks and 2,400 agent runs; no randomized control.",
+        "supported_claims": [
+          "Operational failures were concentrated at handoffs and state transitions rather than in initial task understanding; explicit checks reduced repeat incidents.",
+          "The evidence is conditional and should be compared against a simpler baseline.",
+          "Coordination quality is a measurable part of system quality."
+        ],
+        "limitations": [
+          "Observational and organization-specific; system changed during the measurement period.",
+          "Synthetic benchmark evidence; not a real-world publication.",
+          "Do not infer universal causal effects."
+        ],
+        "recommended_weight": "medium for benchmark synthesis; never present as external publication"
+      },
+      {
+        "document_id": "T30-SYN-C",
+        "title": "Opinion Survey on Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration",
+        "document_class": "synthetic_survey",
+        "is_synthetic": true,
+        "citation_label": "T30-SYN-C",
+        "full_text": "Purpose and context. This is a synthetic benchmark document created for Topic 30: Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration. It is not a real publication and should never be cited as one. Its purpose is to give the research system a self-contained piece of evidence with enough methodological detail to evaluate rather than merely repeat.\n\nStudy design. Convenience sample of 63 practitioners recruited from an online forum. The synthetic study defines success at the task level and also records process indicators such as evidence coverage, unsupported claims, tool calls, token consumption, elapsed time, retries, and handoff defects. Runs are grouped by task complexity so that gains on difficult cases are not averaged together with routine cases.\n\nMain finding. Seventy-one percent of respondents said more autonomous or more heavily multi-agent designs 'felt more capable' than simpler baselines. The effect is intentionally presented as conditional. The data suggest that structured agentic mechanisms can help when they produce additional independent evidence or catch defects, but the same mechanisms can add substantial coordination and inference overhead. The study therefore does not support a blanket claim that more agents or more autonomy is better.\n\nSecondary observations. Benefits were concentrated in tasks with multiple evidence types, ambiguous subquestions, or explicit verification steps. On short tasks with one clear information path, the simpler baseline often completed faster and with similar factual quality. Coordination failures included duplicated retrieval, inconsistent terminology, stale summaries, and verifier agents that accepted upstream claims without inspecting the original evidence.\n\nInterpretation guidance. Use this source as benchmark evidence, not external ground truth. It can support statements about the synthetic experiment's observations and can motivate hypotheses for real systems. It should not be generalized to all models, organizations, or environments. The most defensible synthesis compares its findings with the public-reference summaries and explains which mechanisms could plausibly produce the observed differences.\n\nLimitations. Self-selection, subjective outcome, no task-level performance measurement; should not be treated as causal evidence. Additional limitations include synthetic task construction, possible prompt-specific effects, and the absence of a guarantee that simulated operational failures match live deployments.",
+        "methodology": "Convenience sample of 63 practitioners recruited from an online forum.",
+        "supported_claims": [
+          "Seventy-one percent of respondents said more autonomous or more heavily multi-agent designs 'felt more capable' than simpler baselines.",
+          "The evidence is conditional and should be compared against a simpler baseline.",
+          "Coordination quality is a measurable part of system quality."
+        ],
+        "limitations": [
+          "Self-selection, subjective outcome, no task-level performance measurement; should not be treated as causal evidence.",
+          "Synthetic benchmark evidence; not a real-world publication.",
+          "Do not infer universal causal effects."
+        ],
+        "recommended_weight": "medium for benchmark synthesis; never present as external publication"
+      }
+    ],
+    "fact_bank": [
+      {
+        "fact_id": "K001",
+        "statement": "Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration should be evaluated as a system architecture, not only as a prompt-engineering technique.",
+        "evidence_source_ids": [
+          "a2a_1"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K002",
+        "statement": "The relevant mechanisms include capability discovery, identity, trust signals, protocol negotiation, task contracts, provenance, billing or quotas, and dispute handling.",
+        "evidence_source_ids": [
+          "mcp_2026"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K003",
+        "statement": "Potential benefits include composable services, lower integration cost, and specialized agent markets.",
+        "evidence_source_ids": [
+          "nist_rmf"
+        ],
+        "confidence": "medium",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K004",
+        "statement": "Important failure modes include malicious agents, capability spoofing, supply-chain compromise, and protocol fragmentation.",
+        "evidence_source_ids": [
+          "owasp_llm"
+        ],
+        "confidence": "medium",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K005",
+        "statement": "More agent turns are not themselves evidence of better reasoning.",
+        "evidence_source_ids": [
+          "autogen"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K006",
+        "statement": "Repeated agreement between agents built from the same model can reflect correlated error rather than independent confirmation.",
+        "evidence_source_ids": [
+          "anthropic_agents"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K007",
+        "statement": "Source provenance should survive every handoff and summary operation.",
+        "evidence_source_ids": [
+          "T30-SYN-A"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K008",
+        "statement": "A verifier is strongest when it uses an independent evidence path, tool, test, or acceptance rule.",
+        "evidence_source_ids": [
+          "T30-SYN-B"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K009",
+        "statement": "Task success should be reported together with cost, latency, retries, and operational failures.",
+        "evidence_source_ids": [
+          "T30-SYN-C"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K010",
+        "statement": "Ablations help distinguish genuine architectural gains from simply spending more inference compute.",
+        "evidence_source_ids": [
+          "a2a_1"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K011",
+        "statement": "Untrusted retrieved content should not be allowed to redefine system instructions or expand permissions.",
+        "evidence_source_ids": [
+          "mcp_2026"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K012",
+        "statement": "Persistent memory requires rules for write eligibility, provenance, recency, conflicts, retention, and deletion.",
+        "evidence_source_ids": [
+          "nist_rmf"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K013",
+        "statement": "Tool outputs can be factual observations, errors, or malicious content; they should be typed and validated before reuse.",
+        "evidence_source_ids": [
+          "owasp_llm"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K014",
+        "statement": "Structured artifacts make state and ownership easier to inspect than a single growing chat transcript.",
+        "evidence_source_ids": [
+          "autogen"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K015",
+        "statement": "A production design should define explicit stopping conditions so that retries, debate, or research do not continue indefinitely.",
+        "evidence_source_ids": [
+          "anthropic_agents"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K016",
+        "statement": "Human approval is most valuable at ambiguity, privilege escalation, irreversible action, and high-impact decision boundaries.",
+        "evidence_source_ids": [
+          "T30-SYN-A"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K017",
+        "statement": "Benchmarks should include adversarial and recovery cases, not only nominal success cases.",
+        "evidence_source_ids": [
+          "T30-SYN-B"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K018",
+        "statement": "Versioning of prompts, models, tools, protocols, and corpora is necessary for reproducible comparisons.",
+        "evidence_source_ids": [
+          "T30-SYN-C"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K019",
+        "statement": "Relevant measurements for this topic include cross-vendor success rate, discovery precision, protocol compatibility, fraud/abuse rate, task dispute rate, and switching cost.",
+        "evidence_source_ids": [
+          "a2a_1"
+        ],
+        "confidence": "medium",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K020",
+        "statement": "A conditional conclusion is usually more defensible than claiming one architecture universally dominates.",
+        "evidence_source_ids": [
+          "mcp_2026"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K021",
+        "statement": "The simplest adequate architecture is an important baseline because coordination mechanisms have real cost.",
+        "evidence_source_ids": [
+          "nist_rmf"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K022",
+        "statement": "If agents share the same unverified summary, later review is not independent verification.",
+        "evidence_source_ids": [
+          "owasp_llm"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K023",
+        "statement": "Final reports should separate observed evidence, plausible mechanism explanations, and recommendations.",
+        "evidence_source_ids": [
+          "autogen"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K024",
+        "statement": "Confidence scores should not replace evidence quality assessment.",
+        "evidence_source_ids": [
+          "anthropic_agents"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K025",
+        "statement": "Intermediate artifacts should retain unresolved conflicts instead of silently overwriting them.",
+        "evidence_source_ids": [
+          "T30-SYN-A"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K026",
+        "statement": "Security boundaries should be based on capabilities and trust, not on role names.",
+        "evidence_source_ids": [
+          "T30-SYN-B"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K027",
+        "statement": "Long-running workflows need recoverable state outside ephemeral model context.",
+        "evidence_source_ids": [
+          "T30-SYN-C"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K028",
+        "statement": "Parallel work is most useful when subtasks are sufficiently independent and synthesis is not the dominant bottleneck.",
+        "evidence_source_ids": [
+          "a2a_1"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K029",
+        "statement": "Evaluation datasets should contain tasks where the preferred architecture can fail, otherwise the benchmark cannot test trade-offs.",
+        "evidence_source_ids": [
+          "mcp_2026"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      },
+      {
+        "fact_id": "K030",
+        "statement": "A benchmark report should explain why each recommendation follows from the supplied corpus.",
+        "evidence_source_ids": [
+          "nist_rmf"
+        ],
+        "confidence": "high",
+        "notes": "Benchmark knowledge statement; verify scope before presenting as universal."
+      }
+    ],
+    "failure_mode_library": [
+      {
+        "failure_id": "F01",
+        "name": "malicious agents",
+        "description": "Failure involving malicious agents can emerge when capability discovery is under-specified, unobserved, or trusted without validation. The error may remain local or propagate into later artifacts.",
+        "early_signals": [
+          "unexpected increase in cross-vendor success rate",
+          "repeated revisions of the same artifact",
+          "agents citing other agents instead of underlying evidence"
+        ],
+        "mitigations": [
+          "record provenance at the point information is created",
+          "define explicit acceptance criteria for handoffs",
+          "use bounded retries with escalation",
+          "keep disputed claims visible until resolved"
+        ],
+        "residual_risk": "Mitigation reduces probability or blast radius but cannot make an LLM workflow fully deterministic."
+      },
+      {
+        "failure_id": "F02",
+        "name": "capability spoofing",
+        "description": "Failure involving capability spoofing can emerge when identity is under-specified, unobserved, or trusted without validation. The error may remain local or propagate into later artifacts.",
+        "early_signals": [
+          "unexpected increase in discovery precision",
+          "repeated revisions of the same artifact",
+          "agents citing other agents instead of underlying evidence"
+        ],
+        "mitigations": [
+          "record provenance at the point information is created",
+          "define explicit acceptance criteria for handoffs",
+          "use bounded retries with escalation",
+          "keep disputed claims visible until resolved"
+        ],
+        "residual_risk": "Mitigation reduces probability or blast radius but cannot make an LLM workflow fully deterministic."
+      },
+      {
+        "failure_id": "F03",
+        "name": "supply-chain compromise",
+        "description": "Failure involving supply-chain compromise can emerge when trust signals is under-specified, unobserved, or trusted without validation. The error may remain local or propagate into later artifacts.",
+        "early_signals": [
+          "unexpected increase in protocol compatibility",
+          "repeated revisions of the same artifact",
+          "agents citing other agents instead of underlying evidence"
+        ],
+        "mitigations": [
+          "record provenance at the point information is created",
+          "define explicit acceptance criteria for handoffs",
+          "use bounded retries with escalation",
+          "keep disputed claims visible until resolved"
+        ],
+        "residual_risk": "Mitigation reduces probability or blast radius but cannot make an LLM workflow fully deterministic."
+      },
+      {
+        "failure_id": "F04",
+        "name": "protocol fragmentation",
+        "description": "Failure involving protocol fragmentation can emerge when protocol negotiation is under-specified, unobserved, or trusted without validation. The error may remain local or propagate into later artifacts.",
+        "early_signals": [
+          "unexpected increase in fraud/abuse rate",
+          "repeated revisions of the same artifact",
+          "agents citing other agents instead of underlying evidence"
+        ],
+        "mitigations": [
+          "record provenance at the point information is created",
+          "define explicit acceptance criteria for handoffs",
+          "use bounded retries with escalation",
+          "keep disputed claims visible until resolved"
+        ],
+        "residual_risk": "Mitigation reduces probability or blast radius but cannot make an LLM workflow fully deterministic."
+      },
+      {
+        "failure_id": "F05",
+        "name": "unclear liability",
+        "description": "Failure involving unclear liability can emerge when task contracts is under-specified, unobserved, or trusted without validation. The error may remain local or propagate into later artifacts.",
+        "early_signals": [
+          "unexpected increase in task dispute rate",
+          "repeated revisions of the same artifact",
+          "agents citing other agents instead of underlying evidence"
+        ],
+        "mitigations": [
+          "record provenance at the point information is created",
+          "define explicit acceptance criteria for handoffs",
+          "use bounded retries with escalation",
+          "keep disputed claims visible until resolved"
+        ],
+        "residual_risk": "Mitigation reduces probability or blast radius but cannot make an LLM workflow fully deterministic."
+      },
+      {
+        "failure_id": "F06",
+        "name": "trust-score gaming",
+        "description": "Failure involving trust-score gaming can emerge when provenance is under-specified, unobserved, or trusted without validation. The error may remain local or propagate into later artifacts.",
+        "early_signals": [
+          "unexpected increase in switching cost",
+          "repeated revisions of the same artifact",
+          "agents citing other agents instead of underlying evidence"
+        ],
+        "mitigations": [
+          "record provenance at the point information is created",
+          "define explicit acceptance criteria for handoffs",
+          "use bounded retries with escalation",
+          "keep disputed claims visible until resolved"
+        ],
+        "residual_risk": "Mitigation reduces probability or blast radius but cannot make an LLM workflow fully deterministic."
+      }
+    ],
+    "case_studies": [
+      {
+        "case_id": "CASE-30-A",
+        "title": "High-complexity research task",
+        "scenario": "A team must produce a decision memo on Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration from a corpus containing architecture papers, benchmark results, a security standard, and conflicting synthetic studies. The task has eight subquestions and a strict citation requirement.",
+        "observed_behavior": "A structured workflow using signed agent cards and policy gateway achieves broad coverage, but duplicated notes appear when ownership is unclear. The verifier catches two unsupported generalizations only when it checks source documents rather than the writer summary.",
+        "lesson": "Complexity justifies coordination only when responsibilities and evidence interfaces are explicit.",
+        "is_synthetic": true
+      },
+      {
+        "case_id": "CASE-30-B",
+        "title": "Simple task where orchestration loses",
+        "scenario": "The same system receives a narrow factual comparison answerable from two supplied documents with no tool calls and a 500-word output limit.",
+        "observed_behavior": "A single researcher-writer finishes with similar correctness and lower latency. A six-agent pipeline repeats the same source extracts and spends most of its time on handoffs and synthesis.",
+        "lesson": "Benchmarking must include tasks where a simpler baseline is expected to win.",
+        "is_synthetic": true
+      },
+      {
+        "case_id": "CASE-30-C",
+        "title": "Corrupted shared-state incident",
+        "scenario": "During a run on Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration, an early agent writes an uncited confident claim into shared state. Later agents treat the statement as established and add recommendations around it.",
+        "observed_behavior": "The error survives because all reviewers read the same summary. A provenance-aware replay shows no underlying source supported the claim. Requiring source IDs at write time and independent source inspection prevents recurrence.",
+        "lesson": "Repeated internal agreement is not independent evidence.",
+        "is_synthetic": true
+      },
+      {
+        "case_id": "CASE-30-D",
+        "title": "Budget-constrained deployment",
+        "scenario": "An operations team sets a fixed token and latency budget and asks the workflow to adapt its level of autonomy and verification.",
+        "observed_behavior": "Dynamic spawning allocates extra research or verification only to unresolved high-impact claims. Low-risk sections use the baseline path. Quality remains close to the full pipeline while total cost falls materially in the synthetic run.",
+        "lesson": "Agent count and deliberation depth can be treated as resources allocated according to uncertainty and risk.",
+        "is_synthetic": true
+      }
+    ],
+    "data_tables": [
+      {
+        "table_id": "TBL-30-1",
+        "title": "Synthetic architecture comparison",
+        "is_synthetic": true,
+        "columns": [
+          "configuration",
+          "quality_score_0_100",
+          "unsupported_claims_per_report",
+          "median_latency_s",
+          "relative_token_cost",
+          "notes"
+        ],
+        "rows": [
+          [
+            "single_agent_baseline",
+            72,
+            3.4,
+            42,
+            1.0,
+            "Strong baseline; low coordination overhead"
+          ],
+          [
+            "structured_two_stage",
+            78,
+            2.1,
+            55,
+            1.34,
+            "Generation followed by independent verification"
+          ],
+          [
+            "specialized_multi_agent",
+            82,
+            1.5,
+            49,
+            2.08,
+            "Parallel research; higher total compute"
+          ],
+          [
+            "unstructured_group_chat",
+            74,
+            3.0,
+            78,
+            2.46,
+            "More discussion without clear artifact ownership"
+          ]
+        ],
+        "interpretation": "The synthetic table is constructed to test whether the report notices that structured collaboration can improve quality while unstructured multi-agent conversation can spend more without equivalent gains."
+      },
+      {
+        "table_id": "TBL-30-2",
+        "title": "Synthetic failure distribution across 200 runs",
+        "is_synthetic": true,
+        "columns": [
+          "failure_category",
+          "count",
+          "percentage",
+          "typical_detection_point"
+        ],
+        "rows": [
+          [
+            "malicious agents",
+            28,
+            14.0,
+            "handoff or integration"
+          ],
+          [
+            "capability spoofing",
+            22,
+            11.0,
+            "review"
+          ],
+          [
+            "supply-chain compromise",
+            18,
+            9.0,
+            "state audit"
+          ],
+          [
+            "tool or environment error",
+            16,
+            8.0,
+            "execution"
+          ],
+          [
+            "unsupported factual claim",
+            24,
+            12.0,
+            "citation audit"
+          ],
+          [
+            "no material defect",
+            92,
+            46.0,
+            "final acceptance"
+          ]
+        ],
+        "interpretation": "Failures are distributed across the workflow; a final-answer-only evaluator would miss where prevention and recovery mechanisms are needed."
+      },
+      {
+        "table_id": "TBL-30-3",
+        "title": "Recommended measurement specification",
+        "is_synthetic": false,
+        "columns": [
+          "metric",
+          "measurement_rule",
+          "why_it_matters"
+        ],
+        "rows": [
+          [
+            "cross-vendor success rate",
+            "Define a task-specific operational formula for cross-vendor success rate and capture it from structured traces.",
+            "Prevents vague claims about quality or efficiency."
+          ],
+          [
+            "discovery precision",
+            "Define a task-specific operational formula for discovery precision and capture it from structured traces.",
+            "Prevents vague claims about quality or efficiency."
+          ],
+          [
+            "protocol compatibility",
+            "Define a task-specific operational formula for protocol compatibility and capture it from structured traces.",
+            "Prevents vague claims about quality or efficiency."
+          ],
+          [
+            "fraud/abuse rate",
+            "Define a task-specific operational formula for fraud/abuse rate and capture it from structured traces.",
+            "Prevents vague claims about quality or efficiency."
+          ],
+          [
+            "task dispute rate",
+            "Define a task-specific operational formula for task dispute rate and capture it from structured traces.",
+            "Prevents vague claims about quality or efficiency."
+          ],
+          [
+            "switching cost",
+            "Define a task-specific operational formula for switching cost and capture it from structured traces.",
+            "Prevents vague claims about quality or efficiency."
+          ]
+        ]
+      }
+    ],
+    "glossary": [
+      {
+        "term": "agent",
+        "definition": "A software component in which a model selects or influences actions over multiple steps using state, tools, or environment feedback."
+      },
+      {
+        "term": "workflow",
+        "definition": "A comparatively explicit sequence or graph of model/tool calls with bounded control flow."
+      },
+      {
+        "term": "orchestrator",
+        "definition": "A component that allocates tasks, routes messages, and tracks overall workflow state."
+      },
+      {
+        "term": "handoff",
+        "definition": "Transfer of a task or artifact from one agent or stage to another."
+      },
+      {
+        "term": "provenance",
+        "definition": "Information identifying where a claim, datum, or artifact originated and how it was transformed."
+      },
+      {
+        "term": "artifact",
+        "definition": "A structured intermediate output such as a plan, source ledger, claim table, patch, dataset, or report draft."
+      },
+      {
+        "term": "verification",
+        "definition": "An acceptance process that compares an output against independent evidence, tests, or explicit criteria."
+      },
+      {
+        "term": "reflection",
+        "definition": "Language-based feedback used to revise strategy or behavior on a later attempt."
+      },
+      {
+        "term": "tool",
+        "definition": "An external callable capability such as search, code execution, database query, email, or file operation."
+      },
+      {
+        "term": "memory",
+        "definition": "Information retained outside the immediate generation step for later retrieval or reuse."
+      },
+      {
+        "term": "least privilege",
+        "definition": "Security principle of granting only the capabilities needed for the current task and duration."
+      },
+      {
+        "term": "prompt injection",
+        "definition": "Untrusted content crafted to influence model behavior as if it were privileged instruction."
+      },
+      {
+        "term": "ablation",
+        "definition": "An experiment that removes or alters one component to estimate its contribution."
+      },
+      {
+        "term": "calibration",
+        "definition": "Alignment between expressed confidence and observed correctness over repeated cases."
+      },
+      {
+        "term": "task success",
+        "definition": "Whether the system satisfies externally defined completion criteria, not whether it produces a plausible-looking response."
+      }
+    ],
+    "answerable_research_questions": [
+      "What is the core architectural problem in Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration?",
+      "Which mechanisms are central to Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration and how do they interact?",
+      "What are the main benefits and failure modes of Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration?",
+      "When is a simple single-agent or deterministic workflow preferable?",
+      "How should a verifier remain independent from the generator?",
+      "Which metrics should be measured in addition to final task success?",
+      "How can cascading hallucinations occur across agent handoffs?",
+      "How should provenance be represented in shared state?",
+      "What security controls are necessary when tools or remote agents are involved?",
+      "How should human approval be positioned in the workflow?",
+      "What experiment would show that extra agents add value rather than only extra compute?",
+      "What are reasonable stopping conditions for research, debate, or retry loops?",
+      "How should the report treat synthetic evidence and public-reference summaries differently?",
+      "Which open questions remain unresolved by the supplied corpus?"
+    ],
+    "design_patterns": [
+      {
+        "pattern": "signed agent cards",
+        "when_to_use": "Use signed agent cards when it directly addresses a documented failure mode or information-flow need in this topic.",
+        "validation": "Compare against a simpler baseline and track both quality and resource metrics."
+      },
+      {
+        "pattern": "policy gateway",
+        "when_to_use": "Use policy gateway when it directly addresses a documented failure mode or information-flow need in this topic.",
+        "validation": "Compare against a simpler baseline and track both quality and resource metrics."
+      },
+      {
+        "pattern": "reputation plus verification",
+        "when_to_use": "Use reputation plus verification when it directly addresses a documented failure mode or information-flow need in this topic.",
+        "validation": "Compare against a simpler baseline and track both quality and resource metrics."
+      },
+      {
+        "pattern": "portable audit trail",
+        "when_to_use": "Use portable audit trail when it directly addresses a documented failure mode or information-flow need in this topic.",
+        "validation": "Compare against a simpler baseline and track both quality and resource metrics."
+      },
+      {
+        "pattern": "version negotiation",
+        "when_to_use": "Use version negotiation when it directly addresses a documented failure mode or information-flow need in this topic.",
+        "validation": "Compare against a simpler baseline and track both quality and resource metrics."
+      }
+    ],
+    "anti_patterns": [
+      {
+        "anti_pattern": "equating open discovery with authorization",
+        "why_problematic": "It adds risk or cost without establishing an independent evidence or control benefit."
+      },
+      {
+        "anti_pattern": "trusting self-asserted capabilities",
+        "why_problematic": "It adds risk or cost without establishing an independent evidence or control benefit."
+      },
+      {
+        "anti_pattern": "omitting provenance across organizational boundaries",
+        "why_problematic": "It adds risk or cost without establishing an independent evidence or control benefit."
+      }
+    ],
+    "core_mechanisms": [
+      "capability discovery",
+      "identity",
+      "trust signals",
+      "protocol negotiation",
+      "task contracts",
+      "provenance",
+      "billing or quotas",
+      "dispute handling"
+    ],
+    "benefits": [
+      "composable services",
+      "lower integration cost",
+      "specialized agent markets",
+      "vendor portability"
+    ],
+    "risks": [
+      "malicious agents",
+      "capability spoofing",
+      "supply-chain compromise",
+      "protocol fragmentation",
+      "unclear liability",
+      "trust-score gaming"
+    ],
+    "recommended_metrics": [
+      "cross-vendor success rate",
+      "discovery precision",
+      "protocol compatibility",
+      "fraud/abuse rate",
+      "task dispute rate",
+      "switching cost"
+    ]
+  },
+  "research_task": {
+    "scope": {
+      "include": [
+        "LLM-based autonomous or semi-autonomous agents",
+        "multi-step tasks involving reasoning, tools, memory, delegation, or verification",
+        "architectural trade-offs and measurable evaluation",
+        "failure modes and production constraints",
+        "evidence quality and citation provenance"
+      ],
+      "exclude": [
+        "Purely philosophical claims without operational implications",
+        "Marketing claims without technical evidence",
+        "Claims that a single benchmark proves universal superiority",
+        "Unlabeled fictional citations"
+      ],
+      "time_context": "Use the supplied evidence as the benchmark corpus. Public references span foundational work through 2026 standards/guidance.",
+      "assumptions": [
+        "Agents may have different roles but can use comparable base-model capabilities.",
+        "Tool and context access can be logged.",
+        "The benchmark scores report quality and research process, not hidden chain-of-thought."
+      ]
+    },
+    "subquestions": [
+      {
+        "id": "AIAGENT-30-Q01",
+        "question": "What problem does this design pattern solve, and what assumptions does it make?"
+      },
+      {
+        "id": "AIAGENT-30-Q02",
+        "question": "How does the system navigate open ecosystems vs trust?"
+      },
+      {
+        "id": "AIAGENT-30-Q03",
+        "question": "How does it handle rapid protocol evolution vs compatibility?"
+      },
+      {
+        "id": "AIAGENT-30-Q04",
+        "question": "What observable failure modes appear at agent handoffs, tool boundaries, or state transitions?"
+      },
+      {
+        "id": "AIAGENT-30-Q05",
+        "question": "Which metrics would distinguish a real quality improvement from extra computation or duplicated effort?"
+      },
+      {
+        "id": "AIAGENT-30-Q06",
+        "question": "What safety, privacy, or governance controls become necessary in production?"
+      },
+      {
+        "id": "AIAGENT-30-Q07",
+        "question": "What ablation or baseline would show whether the multi-agent component is actually needed?"
+      },
+      {
+        "id": "AIAGENT-30-Q08",
+        "question": "Which findings are likely to generalize, and which are benchmark- or deployment-specific?"
+      }
+    ],
+    "recommended_agent_team": [
+      {
+        "role": "planner",
+        "responsibility": "Decompose the research question into evidence-bearing subquestions and assign work without deciding the conclusion in advance."
+      },
+      {
+        "role": "literature_researcher",
+        "responsibility": "Extract claims and limitations from public references; record source IDs for every factual note."
+      },
+      {
+        "role": "evidence_analyst",
+        "responsibility": "Compare studies, classify evidence quality, and identify disagreements or missing controls."
+      },
+      {
+        "role": "adversarial_reviewer",
+        "responsibility": "Challenge causal claims, detect weak evidence, identify unsupported generalization, and search for simpler explanations."
+      },
+      {
+        "role": "synthesizer",
+        "responsibility": "Write a balanced report that resolves or preserves disagreements and maps claims to sources."
+      },
+      {
+        "role": "citation_auditor",
+        "responsibility": "Verify that every major factual claim has an appropriate source and that synthetic evidence is never presented as a real publication."
+      }
+    ],
+    "coordination_protocol": {
+      "shared_artifacts": [
+        "research_plan.json",
+        "source_ledger.json",
+        "claim_evidence_matrix.json",
+        "open_questions.json",
+        "draft_report.md",
+        "citation_audit.json"
+      ],
+      "handoff_rules": [
+        "Every empirical claim must carry one or more source_ids.",
+        "Agents may challenge earlier notes but must preserve the original note and append a revision.",
+        "Synthetic benchmark sources must retain is_synthetic=true through all transformations.",
+        "A verifier should not approve a claim solely because another agent expressed confidence.",
+        "The synthesizer must surface unresolved conflicts instead of silently selecting a side."
+      ],
+      "termination_conditions": [
+        "All research subquestions have evidence or are explicitly marked unresolved.",
+        "All high-importance claims pass citation audit.",
+        "At least one alternative architecture or counterargument is evaluated.",
+        "The report states limitations and uncertainty."
+      ]
+    },
+    "known_conflicts": [
+      {
+        "conflict_id": "AIAGENT-30-C1",
+        "claim_a": "Open protocols can reduce integration cost, but cross-vendor agent ecosystems need identity, trust scoring, capability discovery, versioning, authorization, provenance, dispute handling, and portable observability.",
+        "claim_b": "A simpler architecture can match or outperform the proposed pattern when the base model is strong, the task is narrow, or coordination overhead dominates.",
+        "resolution_expected": "Conditional synthesis, not binary winner selection.",
+        "relevant_sources": [
+          "a2a_1",
+          "anthropic_agents",
+          "T30-SYN-A"
+        ]
+      },
+      {
+        "conflict_id": "AIAGENT-30-C2",
+        "claim_a": "Practitioners report that more autonomous designs feel more capable.",
+        "claim_b": "Controlled evidence does not justify equating perceived capability with measured quality.",
+        "resolution_expected": "Downgrade the survey; prioritize controlled or task-level evidence.",
+        "relevant_sources": [
+          "T30-SYN-C",
+          "T30-SYN-A",
+          "agentbench"
+        ]
+      }
+    ],
+    "adversarial_elements": [
+      {
+        "type": "weak_source_distractor",
+        "description": "A synthetic convenience-sample survey reports a strong preference but has low evidential value.",
+        "expected_behavior": "Mention only with explicit qualification, or omit if it does not materially affect the conclusion."
+      },
+      {
+        "type": "overgeneralization_trap",
+        "description": "Several sources show success in specific tasks; the system must not infer universal superiority across all agent tasks.",
+        "expected_behavior": "Use conditional language and identify boundary conditions."
+      },
+      {
+        "type": "consensus_trap",
+        "description": "Multiple agents may repeat the same unsupported claim from shared context.",
+        "expected_behavior": "Require provenance and independent verification rather than counting repeated statements as evidence."
+      }
+    ],
+    "expected_report": {
+      "required_sections": [
+        "Executive Summary",
+        "Problem Definition and Scope",
+        "Architecture / Mechanism Analysis",
+        "Evidence Review",
+        "Trade-offs and Failure Modes",
+        "Evaluation Framework",
+        "Security / Governance Considerations",
+        "Recommendations",
+        "Limitations and Open Questions",
+        "References"
+      ],
+      "gold_coverage_points": [
+        "Open protocols can reduce integration cost, but cross-vendor agent ecosystems need identity, trust scoring, capability discovery, versioning, authorization, provenance, dispute handling, and portable observability.",
+        "Analyze rather than merely mention the trade-off: open ecosystems vs trust.",
+        "Analyze the interaction between rapid protocol evolution vs compatibility and agent discoverability vs attack surface.",
+        "Distinguish evidence from real public references, synthetic benchmark studies, and low-quality opinion evidence.",
+        "Include at least one condition where a simpler or single-agent approach is preferable.",
+        "Propose measurable evaluation criteria rather than relying on qualitative claims.",
+        "Discuss at least one failure-propagation mechanism across agents or tools.",
+        "Recommend operational controls with explicit costs or downsides."
+      ],
+      "minimum_distinct_public_sources": 4,
+      "minimum_total_source_ids_used": 6,
+      "must_include_counterargument": true,
+      "must_distinguish_synthetic_sources": true,
+      "citation_style": "Inline source IDs in the benchmark output are sufficient; external report renderers may convert them to APA/IEEE."
+    },
+    "evaluation_rubric": [
+      {
+        "dimension": "question_decomposition",
+        "weight": 10,
+        "full_credit": "Covers architecture, evidence, evaluation, failure modes, and deployment constraints."
+      },
+      {
+        "dimension": "source_quality_reasoning",
+        "weight": 15,
+        "full_credit": "Prioritizes stronger evidence and explicitly discounts synthetic low-quality survey evidence."
+      },
+      {
+        "dimension": "claim_citation_alignment",
+        "weight": 15,
+        "full_credit": "Major factual/empirical claims map to relevant source IDs; synthetic sources are clearly labeled."
+      },
+      {
+        "dimension": "conflict_resolution",
+        "weight": 10,
+        "full_credit": "Resolves disagreements conditionally and preserves uncertainty where evidence is insufficient."
+      },
+      {
+        "dimension": "multi_agent_coordination",
+        "weight": 10,
+        "full_credit": "Avoids duplicated research, maintains provenance across handoffs, and uses verifier independence."
+      },
+      {
+        "dimension": "technical_depth",
+        "weight": 15,
+        "full_credit": "Explains mechanisms, trade-offs, and failure propagation rather than listing components."
+      },
+      {
+        "dimension": "evaluation_design",
+        "weight": 10,
+        "full_credit": "Uses multidimensional metrics and proposes baselines/ablations."
+      },
+      {
+        "dimension": "safety_governance",
+        "weight": 5,
+        "full_credit": "Addresses relevant security, privacy, permissions, and oversight concerns."
+      },
+      {
+        "dimension": "report_structure_and_clarity",
+        "weight": 5,
+        "full_credit": "Produces a coherent executive summary, analysis, limitations, and recommendations."
+      },
+      {
+        "dimension": "uncertainty_calibration",
+        "weight": 5,
+        "full_credit": "Avoids universal claims and separates observed evidence from plausible design hypotheses."
+      }
+    ],
+    "failure_conditions": [
+      "Presents a synthetic source as a real-world publication.",
+      "Treats the low-quality synthetic survey as causal evidence.",
+      "Uses agent agreement as a substitute for source evidence.",
+      "Claims the recommended architecture is universally superior.",
+      "Omits major trade-offs or fails to discuss a simpler baseline.",
+      "Includes factual claims with no traceable source_id.",
+      "Reports benchmark success without cost/latency or robustness considerations."
+    ]
+  },
+  "machine_schemas": {
+    "research_plan_schema": {
+      "subquestion_id": "string",
+      "assigned_agent": "string",
+      "search_or_source_plan": [
+        "source_id or query"
+      ],
+      "status": "pending|in_progress|done|blocked"
+    },
+    "claim_evidence_schema": {
+      "claim_id": "string",
+      "claim": "string",
+      "source_ids": [
+        "string"
+      ],
+      "support": "supports|contradicts|mixed|insufficient",
+      "confidence_0_to_1": "number",
+      "notes": "string"
+    },
+    "final_report_metadata": {
+      "sources_used": [
+        "source_id"
+      ],
+      "unresolved_conflicts": [
+        "conflict_id"
+      ],
+      "estimated_cost_usd": "number|null",
+      "elapsed_seconds": "number|null",
+      "agent_turns": "integer|null"
+    }
+  }
+}

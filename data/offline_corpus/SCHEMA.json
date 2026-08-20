@@ -1,0 +1,28 @@
+{
+  "top_level": [
+    "benchmark_metadata",
+    "topic",
+    "offline_usage_instructions",
+    "knowledge_base",
+    "research_task",
+    "machine_schemas"
+  ],
+  "knowledge_base": [
+    "knowledge_articles",
+    "source_documents",
+    "fact_bank",
+    "failure_mode_library",
+    "case_studies",
+    "data_tables",
+    "glossary",
+    "answerable_research_questions",
+    "design_patterns",
+    "anti_patterns",
+    "core_mechanisms",
+    "benefits",
+    "risks",
+    "recommended_metrics"
+  ],
+  "citation_rule": "Use document_id/source_id for source documents and article_id for long-form knowledge articles.",
+  "synthetic_rule": "Any evidence with is_synthetic=true is fictional benchmark material and must not be represented as a real publication."
+}

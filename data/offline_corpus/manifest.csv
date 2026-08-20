@@ -1,0 +1,31 @@
+topic_number,topic_id,filename,title,bytes,approx_embedded_prose_words,source_documents,facts,case_studies,data_tables
+1,AIAGENT-01,01_single_agent_vs_multi_agent_architectures_for_complex_research_tasks.json,Single-Agent vs Multi-Agent Architectures for Complex Research Tasks,95284,4934,9,30,4,3
+2,AIAGENT-02,02_role_specialization_in_multi_agent_systems.json,Role Specialization in Multi-Agent Systems,91715,4775,9,30,4,3
+3,AIAGENT-03,03_centralized_orchestrators_vs_decentralized_agent_coordination.json,Centralized Orchestrators vs Decentralized Agent Coordination,93229,4859,9,30,4,3
+4,AIAGENT-04,04_planning_strategies_react_plan_and_execute_and_search_based_reasoning.json,"Planning Strategies: ReAct, Plan-and-Execute, and Search-Based Reasoning",93546,4913,9,30,4,3
+5,AIAGENT-05,05_reflection_and_self_correction_loops_in_language_agents.json,Reflection and Self-Correction Loops in Language Agents,92551,4872,9,30,4,3
+6,AIAGENT-06,06_long_term_memory_architectures_for_ai_agents.json,Long-Term Memory Architectures for AI Agents,93503,4887,9,30,4,3
+7,AIAGENT-07,07_tool_selection_and_reliable_api_use_by_autonomous_agents.json,Tool Selection and Reliable API Use by Autonomous Agents,94336,4940,9,30,4,3
+8,AIAGENT-08,08_retrieval_augmented_research_agents_and_evidence_grounding.json,Retrieval-Augmented Research Agents and Evidence Grounding,92874,4870,9,30,4,3
+9,AIAGENT-09,09_mcp_and_a2a_for_agent_interoperability.json,MCP and A2A for Agent Interoperability,92916,4865,9,30,4,3
+10,AIAGENT-10,10_shared_state_and_context_engineering_in_multi_agent_systems.json,Shared State and Context Engineering in Multi-Agent Systems,92582,4888,9,30,4,3
+11,AIAGENT-11,11_debate_voting_and_conflict_resolution_between_agents.json,"Debate, Voting, and Conflict Resolution Between Agents",92243,4820,9,30,4,3
+12,AIAGENT-12,12_critic_and_verifier_agents_for_research_report_quality.json,Critic and Verifier Agents for Research Report Quality,91203,4839,9,30,4,3
+13,AIAGENT-13,13_cascading_hallucinations_in_multi_agent_pipelines.json,Cascading Hallucinations in Multi-Agent Pipelines,92078,4857,9,30,4,3
+14,AIAGENT-14,14_long_horizon_task_reliability_and_recovery.json,Long-Horizon Task Reliability and Recovery,91834,4851,9,30,4,3
+15,AIAGENT-15,15_web_browsing_agents_for_open_ended_research.json,Web-Browsing Agents for Open-Ended Research,92728,4900,9,30,4,3
+16,AIAGENT-16,16_software_engineering_agents_and_multi_agent_coding_teams.json,Software Engineering Agents and Multi-Agent Coding Teams,92014,4806,9,30,4,3
+17,AIAGENT-17,17_embodied_and_environment_interacting_agents.json,Embodied and Environment-Interacting Agents,92314,4855,9,30,4,3
+18,AIAGENT-18,18_ai_agents_for_scientific_literature_research.json,AI Agents for Scientific Literature Research,92362,4853,9,30,4,3
+19,AIAGENT-19,19_autonomous_data_analysis_agents.json,Autonomous Data Analysis Agents,92563,4883,9,30,4,3
+20,AIAGENT-20,20_enterprise_multi_agent_workflow_automation.json,Enterprise Multi-Agent Workflow Automation,92429,4821,9,30,4,3
+21,AIAGENT-21,21_human_in_the_loop_control_for_agentic_systems.json,Human-in-the-Loop Control for Agentic Systems,91418,4729,9,30,4,3
+22,AIAGENT-22,22_cost_latency_and_parallelism_in_multi_agent_research.json,"Cost, Latency, and Parallelism in Multi-Agent Research",92164,4835,9,30,4,3
+23,AIAGENT-23,23_observability_tracing_and_debugging_of_agent_systems.json,"Observability, Tracing, and Debugging of Agent Systems",92125,4850,9,30,4,3
+24,AIAGENT-24,24_prompt_injection_and_tool_poisoning_against_autonomous_agents.json,Prompt Injection and Tool Poisoning Against Autonomous Agents,94858,4930,9,30,4,3
+25,AIAGENT-25,25_privacy_and_sensitive_data_leakage_in_multi_agent_systems.json,Privacy and Sensitive-Data Leakage in Multi-Agent Systems,92921,4878,9,30,4,3
+26,AIAGENT-26,26_least_privilege_sandboxing_and_action_authorization.json,"Least Privilege, Sandboxing, and Action Authorization",92730,4845,9,30,4,3
+27,AIAGENT-27,27_benchmarks_and_metrics_for_evaluating_ai_agents.json,Benchmarks and Metrics for Evaluating AI Agents,92738,4885,9,30,4,3
+28,AIAGENT-28,28_reproducibility_and_regression_testing_for_agent_pipelines.json,Reproducibility and Regression Testing for Agent Pipelines,91848,4829,9,30,4,3
+29,AIAGENT-29,29_governance_and_risk_management_for_agentic_ai.json,Governance and Risk Management for Agentic AI,93085,4989,9,30,4,3
+30,AIAGENT-30,30_future_agent_ecosystems_open_standards_marketplaces_and_cross_vendor_c.json,"Future Agent Ecosystems: Open Standards, Marketplaces, and Cross-Vendor Collaboration",95665,5012,9,30,4,3
